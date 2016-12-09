@@ -157,6 +157,7 @@ export default {
           if (this.get('showActions')) {
             this._setupActions()
           }
+          this._setupGistThumbnail()
         })
       },
 
@@ -184,6 +185,18 @@ export default {
           }
           DiscourseURL.routeTo(url)
         })
+      },
+
+      _setupGistThumbnail() {
+        let topic = this.get('topic');
+        let thumbnailSrc = topic.gist_thumbnail_url;
+        if (thumbnailSrc) {
+          var gistThumbnail = `<div class="topic-excerpt" style="max-height:none;"><img class="topic-excerpt-thumbnail" src=${thumbnailSrc}></img></div>`;
+          var $topicDetails = this.$('.topic-details');
+          $topicDetails.append(gistThumbnail);
+          var $topicDetails = this.$('.topic-thumbnail').remove();
+          this._setupExcerptClick();
+        }
       },
 
       _sizeThumbnails() {
