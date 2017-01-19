@@ -57,7 +57,8 @@ export default {
             siteEnabled = siteSetting && siteSetting.split('|').indexOf(filterType) > -1,
             siteDefaults = Discourse.SiteSettings.topic_list_set_category_defaults;
 
-        return category ? (catEnabled || siteDefaults && siteEnabled) : siteEnabled
+        if (category) { var isNotJobs = category.slug !== "jobs"; }
+        return category ? (catEnabled || siteDefaults && siteEnabled && isNotJobs) : siteEnabled
       },
 
       // @computed('topics') is used because topics change whenever the route changes
