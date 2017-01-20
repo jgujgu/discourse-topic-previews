@@ -196,7 +196,7 @@ after_initialize do
     end
 
     def topic_post_id
-      object.previewed_post&.id
+      object.previewed_post&.post_number
     end
 
     def topic_post_number
