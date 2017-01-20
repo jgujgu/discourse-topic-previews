@@ -221,7 +221,16 @@ after_initialize do
     def thumbnails
       return unless object.archetype == Archetype.default
       if SiteSetting.topic_list_hotlink_thumbnails
-        thumbs = { normal: object.image_url, retina: object.image_url }
+        thumb = object.image_url
+        if accepted_answer_post_id = object.custom_fields["accepted_answer_post_id"]
+          post = Post.find(accepted_answer_post_id)
+          if img = post.image_url
+            thumb = img
+          elsif img = post.custom_fields["gist_thumbnail_url"]
+            thumb = img
+          end
+        end
+        thumbs = { normal: thumb, retina: thumb }
       else
         thumbs = get_thumbnails || get_thumbnails_from_image_url
       end
