@@ -180,8 +180,8 @@ export default {
       _setupThumbnailClick() {
         var $topicThumbnailA = this.$('.topic-thumbnail a')[0];
         let topic = this.get('topic');
-        if (topic.topic_post_id) {
-          $topicThumbnailA.href += '/' + topic.topic_post_id
+        if (topic.topic_post_number) {
+          $topicThumbnailA.href += '/' + topic.topic_post_number
         }
       },
 
