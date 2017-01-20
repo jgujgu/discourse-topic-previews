@@ -150,6 +150,7 @@ export default {
           this._setupTitleCSS()
           if (this.get('showThumbnail') && this.get('socialStyle')) {
             this._sizeThumbnails()
+            this._setupThumbnailClick()
           }
           if (this.get('showExcerpt')) {
             this._setupExcerptClick()
@@ -173,6 +174,14 @@ export default {
           })
           let excerpt = 100 - height;
           this.$('.topic-excerpt').css('max-height', (excerpt >= 17 ? (excerpt > 35 ? excerpt : 17) : 0))
+        }
+      },
+
+      _setupThumbnailClick() {
+        var $topicThumbnailA = this.$('.topic-thumbnail a')[0];
+        let topic = this.get('topic');
+        if (topic.topic_post_id) {
+          $topicThumbnailA.href += '/' + topic.topic_post_id
         }
       },
 
