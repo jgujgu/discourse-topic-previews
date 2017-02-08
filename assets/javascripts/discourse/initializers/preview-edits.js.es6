@@ -181,7 +181,16 @@ export default {
         var $topicThumbnailA = this.$('.topic-thumbnail a')[0];
         let topic = this.get('topic');
         if (topic.topic_post_number) {
-          $topicThumbnailA.href += '/' + topic.topic_post_number
+          var href = $topicThumbnailA.href;
+          var addition = '/' + topic.topic_post_number;
+          var re = new RegExp(/(http|https):\/\/(\w*\.){1,2}io\/t\/[\w|-]*\/\d*/, 'i');
+          var matches = href.match(re);
+          if (matches) {
+            var match = matches[0];
+            $topicThumbnailA.href = match + addition;
+          } else {
+            $topicThumbnailA.href += addition;
+          }
         }
       },
 
